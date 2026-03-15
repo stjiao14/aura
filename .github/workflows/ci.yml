@@ -8,7 +8,8 @@ on:
 
 jobs:
   test:
-    runs-on: macos-15
+    # macos-14: avoids ggml i8mm clang bug on macos-15 (Xcode 16.4)
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
 
@@ -26,8 +27,5 @@ jobs:
       - name: Install JS dependencies
         run: npm ci
 
-      - name: Run frontend tests
-        run: npm run test:types && npm run test
-
-      - name: Run Rust tests (without whisper native compilation)
-        run: cargo test --manifest-path src-tauri/Cargo.toml --no-default-features
+      - name: Run all tests
+        run: npm run test:all

@@ -8,7 +8,9 @@ on:
 
 jobs:
   release-macos:
-    runs-on: macos-15
+    # macos-14: Xcode 15 SDK doesn't trigger the ggml i8mm clang bug that
+    # macos-15 (Xcode 16.4) has with whisper.cpp's ARM intrinsics.
+    runs-on: macos-14
     permissions:
       contents: write
 
