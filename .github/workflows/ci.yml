@@ -28,3 +28,9 @@ jobs:
 
       - name: Run all tests
         run: npm run test:all
+        env:
+          # whisper.cpp/ggml uses ARM intrinsics (i8mm) that require knowing the
+          # exact CPU. Without this, cmake gets a generic arm64 target and fails.
+          # -mcpu=native matches local dev behavior (auto-detect runner's chip).
+          CFLAGS: "-mcpu=native"
+          CXXFLAGS: "-mcpu=native"
