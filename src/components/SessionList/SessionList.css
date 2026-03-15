@@ -1,0 +1,121 @@
+.session-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.session-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 2px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin: 0 -8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.session-item:last-child {
+  border-bottom: none;
+}
+
+.session-item:hover {
+  background: var(--bg-element);
+}
+
+.session-item.has-error .session-title {
+  color: var(--text-tertiary);
+}
+
+.session-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.session-item-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.session-delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 4px;
+  line-height: 1;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.session-item:hover .session-delete-btn {
+  opacity: 1;
+}
+
+.session-delete-btn:hover {
+  color: var(--danger-text);
+  background: var(--danger-bg);
+}
+
+.session-title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.session-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.session-error-msg {
+  font-size: 11px;
+  color: var(--danger-text);
+}
+
+/* Status badges */
+.status-badge {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.01em;
+}
+
+.status-recording  { background: rgba(255,59,48,0.18);   color: #ff6961; }
+.status-processing { background: rgba(255,159,10,0.15);  color: #ff9f0a; }
+.status-done       { background: rgba(52,199,89,0.14);   color: #34c759; }
+.status-error      { background: rgba(255,59,48,0.14);   color: #ff453a; }
+
+/* Empty state */
+.session-empty {
+  text-align: center;
+  padding: 48px 0 24px;
+}
+
+.session-empty p {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+.session-empty-hint {
+  font-size: 12px !important;
+  margin-top: 4px !important;
+}

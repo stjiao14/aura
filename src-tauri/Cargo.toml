@@ -1,0 +1,70 @@
+[package]
+name = "aura"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "aura_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[[bin]]
+name = "aura"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-shell = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-global-shortcut = "2"
+window-vibrancy = "0.6"
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Database
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+# HTTP client (for LLM APIs + HF downloads)
+reqwest = { version = "0.12", features = ["json", "stream", "multipart"] }
+
+# Stream utilities (used in download_model for chunk iteration)
+futures-util = "0.3"
+
+# Error handling
+anyhow = "1"
+thiserror = "1"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Unique IDs
+uuid = { version = "1", features = ["v4"] }
+
+# Async trait support for provider plugins
+async-trait = "0.1"
+
+# Date/time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Audio capture (microphone via CoreAudio)
+cpal = "0.15"
+
+# Whisper transcription (wraps whisper.cpp — requires cmake at build time)
+whisper-rs = "0.14"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.6"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true

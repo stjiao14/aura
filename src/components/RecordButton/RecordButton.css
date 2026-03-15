@@ -1,0 +1,72 @@
+.record-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 2px 12px;
+}
+
+.record-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 22px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-element);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-sm);
+}
+
+.record-btn:hover:not(:disabled) {
+  background: var(--bg-element-hover);
+  border-color: rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-md);
+}
+
+.record-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.record-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.record-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.record-btn.recording {
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+  color: var(--danger-text);
+  box-shadow: none;
+}
+
+.record-btn.recording .record-dot {
+  background: var(--danger-text);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.record-timer {
+  font-size: 22px;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--text-secondary);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.85); }
+}

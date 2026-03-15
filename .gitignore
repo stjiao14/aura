@@ -1,0 +1,41 @@
+# Build outputs
+dist/
+src-tauri/target/
+
+# Node
+node_modules/
+.npm
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Swift Package Manager
+src-tauri/swift-audio/.build/
+.swiftpm/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Claude Code project files (personal dev notes, memory)
+.claude/
+
+# Tauri generated
+src-tauri/gen/
+
+# Aura runtime data (stays local, not committed)
+*.wav
+*.gguf
+*.bin
+
+# Local development certificates
+*.crt
+*.key
+*.p12
+cert.conf

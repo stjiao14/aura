@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Aura",
+  "version": "0.1.0",
+  "identifier": "app.aura.aura",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "vite --port 1420",
+    "beforeBuildCommand": "vite build"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "title": "Aura",
+        "width": 380,
+        "height": 600,
+        "resizable": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": false,
+        "label": "main"
+      }
+    ],
+    "trayIcon": {
+      "id": "main",
+      "iconPath": "icons/tray.png",
+      "iconAsTemplate": true,
+      "menuOnLeftClick": false,
+      "tooltip": "Aura"
+    },
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src ipc: http://localhost:*"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["dmg", "app"],
+    "icon": ["icons/icon.icns", "icons/icon.ico", "icons/icon.png"],
+    "macOS": {
+      "entitlements": "entitlements.plist",
+      "signingIdentity": "-",
+      "minimumSystemVersion": "13.0",
+      "infoPlist": "Info.plist"
+    }
+  }
+}

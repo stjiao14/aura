@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSCalendarsFullAccessUsageDescription</key>
+    <string>Aura reads your calendar to show upcoming meetings and auto-title recordings.</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>Aura reads your calendar to show upcoming meetings and auto-title recordings.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Aura captures microphone audio for meeting transcription.</string>
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>Aura requires screen capture access to record system audio (loopback) during remote meetings.</string>
+</dict>
+</plist>
