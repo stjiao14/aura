@@ -1,12 +1,16 @@
 mod anthropic;
+#[cfg(feature = "local-whisper")]
 mod download;
+#[cfg(feature = "local-whisper")]
 mod local;
 mod ollama;
 mod openai;
 mod whisper_api;
 
 pub use anthropic::AnthropicProvider;
+#[cfg(feature = "local-whisper")]
 pub use download::HfDownloadProvider;
+#[cfg(feature = "local-whisper")]
 pub use local::LocalFileProvider;
 pub use ollama::OllamaProvider;
 pub use openai::OpenAiProvider;

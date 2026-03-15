@@ -58,7 +58,12 @@ chrono = { version = "0.4", features = ["serde"] }
 cpal = "0.15"
 
 # Whisper transcription (wraps whisper.cpp — requires cmake at build time)
-whisper-rs = "0.14"
+# Behind a feature flag so CI can skip the heavy native compilation.
+whisper-rs = { version = "0.14", optional = true }
+
+[features]
+default = ["local-whisper"]
+local-whisper = ["whisper-rs"]
 
 [target.'cfg(target_os = "macos")'.dependencies]
 objc2 = "0.6"

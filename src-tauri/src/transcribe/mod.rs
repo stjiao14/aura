@@ -1,6 +1,7 @@
+#[cfg(feature = "local-whisper")]
+use crate::models::{HfDownloadProvider, LocalFileProvider};
 use crate::models::{
-    HfDownloadProvider, LocalFileProvider, ModelConfig, TranscriptionProvider,
-    TranscriptionProviderKind, WhisperApiProvider,
+    ModelConfig, TranscriptionProvider, TranscriptionProviderKind, WhisperApiProvider,
 };
 use anyhow::Result;
 pub mod diarize;
@@ -33,11 +34,17 @@ pub async fn transcribe(
     cache_dir: &Path,
 ) -> Result<Vec<(f64, String)>> {
     let provider: Box<dyn TranscriptionProvider> = match config.transcription.provider {
+        #[cfg(feature = "local-whisper")]
         TranscriptionProviderKind::LocalFile => {
             Box::new(LocalFileProvider::new(&config.transcription)?)
         }
+        #[cfg(feature = "local-whisper")]
         TranscriptionProviderKind::HfDownload => {
             Box::new(HfDownloadProvider::new(&config.transcription, cache_dir).await?)
+        }
+        #[cfg(not(feature = "local-whisper"))]
+        TranscriptionProviderKind::LocalFile | TranscriptionProviderKind::HfDownload => {
+            anyhow::bail!("Local whisper not available (built without local-whisper feature)")
         }
         TranscriptionProviderKind::WhisperApi => {
             Box::new(WhisperApiProvider::new(&config.transcription)?)

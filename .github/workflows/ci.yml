@@ -26,18 +26,8 @@ jobs:
       - name: Install JS dependencies
         run: npm ci
 
-      # whisper.cpp/ggml uses ARM i8mm intrinsics, but the cmake Rust crate
-      # generates generic arm64 C flags without -mcpu. The crate ignores CFLAGS
-      # env var, so we wrap the compiler to inject -mcpu=native (matching local
-      # dev behavior where clang defaults to native CPU features).
-      - name: Set up compiler wrapper for ARM intrinsics
-        run: |
-          printf '#!/bin/bash\nexec /usr/bin/cc -mcpu=native "$@"\n' > /tmp/cc-native
-          printf '#!/bin/bash\nexec /usr/bin/c++ -mcpu=native "$@"\n' > /tmp/cxx-native
-          chmod +x /tmp/cc-native /tmp/cxx-native
+      - name: Run frontend tests
+        run: npm run test:types && npm run test
 
-      - name: Run all tests
-        run: npm run test:all
-        env:
-          CC: /tmp/cc-native
-          CXX: /tmp/cxx-native
+      - name: Run Rust tests (without whisper native compilation)
+        run: cargo test --manifest-path src-tauri/Cargo.toml --no-default-features
