@@ -121,6 +121,18 @@
   background: var(--bg-element);
 }
 
+.copy-btn {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  padding: 4px 8px;
+}
+
+.copy-btn:hover {
+  color: var(--text-secondary);
+  background: var(--bg-element);
+}
+
 .detail-body {
   flex: 1;
   padding-top: 10px;

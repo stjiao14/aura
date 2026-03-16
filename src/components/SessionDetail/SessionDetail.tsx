@@ -27,6 +27,25 @@ export default function SessionDetail({ session, onBack, onStop }: Props) {
   // Streaming notes — tokens accumulate here during LLM generation
   const [streamingNotes, setStreamingNotes] = useState("");
 
+  // Copy-to-clipboard feedback
+  const [copied, setCopied] = useState(false);
+
+  const copyCurrentTab = () => {
+    let text = "";
+    if (tab === "notes") {
+      text = streamingNotes || detail?.notes || "";
+    } else {
+      text = (detail?.transcript ?? [])
+        .map((c) => `[${formatTime(c.timestampSecs)}]${c.speakerLabel ? ` ${c.speakerLabel}` : ""} ${c.text}`)
+        .join("\n");
+    }
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+
   // Transcript editing & scrolling
   const [editingChunkId, setEditingChunkId] = useState<string | null>(null);
   const [editingChunkText, setEditingChunkText] = useState("");
@@ -179,6 +198,9 @@ export default function SessionDetail({ session, onBack, onStop }: Props) {
           <button className={tab === "transcript" ? "active" : ""} onClick={() => setTab("transcript")}>
             Transcript
             {isLive && detail.transcript.length > 0 && <span className="live-dot" />}
+          </button>
+          <button className="copy-btn" onClick={copyCurrentTab} title={`Copy ${tab}`}>
+            {copied ? "✓ Copied" : "⎘ Copy"}
           </button>
         </div>
       </div>
