@@ -54,7 +54,7 @@ async-trait = "0.1"
 # Date/time
 chrono = { version = "0.4", features = ["serde"] }
 
-# Audio capture (microphone via CoreAudio)
+# Audio capture (microphone via CPAL)
 cpal = "0.15"
 
 # Whisper transcription (wraps whisper.cpp — requires cmake at build time)
@@ -67,6 +67,14 @@ local-whisper = ["whisper-rs"]
 
 [target.'cfg(target_os = "macos")'.dependencies]
 objc2 = "0.6"
+
+# Windows: WASAPI for system audio loopback
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_Media_Audio",
+    "Win32_System_Com",
+] }
 
 [profile.release]
 opt-level = 3
